@@ -35,6 +35,8 @@
 		.buddy_size	= 0, /* no buddy allocation for IRAM */		\
 	}
 
+struct memory_accessor;
+
 void tegra_assert_system_reset(char mode, const char *cmd);
 
 void __init tegra_init_early(void);
