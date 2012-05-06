@@ -28,10 +28,10 @@ modules.builtin
 *.gz
 *.bz2
 *.lzma
-*.xz
 *.lzo
 *.patch
 *.gcno
+*.rej
 
 #
 # Top-level generic files
@@ -78,3 +78,8 @@ GTAGS
 *.orig
 *~
 \#*#
+
+# compressed boot files
+arch/arm/boot/compressed/lib1funcs.S
+arch/arm/boot/compressed/piggy.gzip
+arch/arm/boot/compressed/vmlinux
