@@ -462,6 +462,7 @@ ENDPROC(tegra_cpu_pllp)
  * the specified parameters.
  */
 ENTRY(tegra_generic_smc)
+	.arch_extension sec
 	adr	r3, __tegra_smc_stack
 	stmia	r3, {r4-r12, lr}
 	mov	r3, #0
