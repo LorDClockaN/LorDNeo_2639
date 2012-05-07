@@ -2739,7 +2739,7 @@ static struct clk *tegra_clks[ARRAY_SIZE(tegra_clk_names)];
 /*
  * constructor
  */
-static int __devinit azx_create(struct snd_card *card, struct pci_dev *pci,
+static int __init azx_create(struct snd_card *card, struct pci_dev *pci,
 				struct platform_device *pdev,
 				int dev, int driver_type,
 				struct azx **rchip)
@@ -3232,7 +3232,7 @@ static int __devinit azx_probe_platform(struct platform_device *pdev)
 	return azx_probe(NULL, pdev, pdev_id->driver_data);
 }
 
-static int __devexit azx_remove_platform(struct platform_device *pdev)
+static int __exit azx_remove_platform(struct platform_device *pdev)
 {
 	return snd_card_free(dev_get_drvdata(&pdev->dev));
 }
@@ -3250,8 +3250,9 @@ static struct platform_driver driver_platform = {
 	.driver = {
 		.name = "hda-platform"
 	},
-	.probe = azx_probe_platform,
-	.remove = __devexit_p(azx_remove_platform),
+	// Riemer 07-05-2012: Removes probe and use __exit_p
+	//.probe = azx_probe_platform,
+	.remove = __exit_p(azx_remove_platform),
 	.id_table = azx_platform_ids,
 #ifdef CONFIG_PM
 	.suspend = azx_suspend_platform,
@@ -3271,7 +3272,8 @@ static int __init alsa_card_azx_init(void)
 	}
 
 #ifdef CONFIG_SND_HDA_PLATFORM_DRIVER
-	err = platform_driver_register(&driver_platform);
+	// Riemer 07-05-2012: Instead of *_register use *_probe
+	err = platform_driver_probe( &driver_platform, azx_probe_platform);
 	if (err < 0) {
 		snd_printk(KERN_ERR SFX "Failed to register platform driver\n");
 		pci_unregister_driver(&driver);
