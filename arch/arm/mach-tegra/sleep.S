@@ -49,6 +49,16 @@
 #define TEGRA_PMC_VIRT		(TEGRA_PMC_BASE - IO_APB_PHYS + IO_APB_VIRT)
 #define TEGRA_CLK_RESET_VIRT	(TEGRA_CLK_RESET_BASE - IO_PPSB_PHYS + IO_PPSB_VIRT)
 
+#if defined(__GNUC__) && \
+defined(__GNUC_MINOR__) && \
+defined(__GNUC_PATCHLEVEL__) && \
+((__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)) \
+    >= 40502
+#define USE_ARCH_EXTENSION_SEC 1
+#else
+#define USE_ARCH_EXTENSION_SEC 0
+#endif
+
 /*
  * tegra_pen_lock
  *
