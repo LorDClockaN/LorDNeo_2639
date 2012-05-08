@@ -5,8 +5,10 @@
 #TOOLCHAIN=/home/lord/android/system/prebuilt/linux-x86/toolchain/arm-eabi-4.5.4/bin/
 #TOOLCHAIN_PREFIX=arm-eabi-
 
-PATH=$PATH:/home/lord/Desktop/dhd/arm-eabi-4.5-2011-10/bin/
-export CCOMPILER=/home/lord/Desktop/dhd/arm-eabi-4.5-2011-10/bin/arm-eabi-
+#PATH=$PATH:/home/lord/Desktop/dhd/arm-eabi-4.5-2011-10/bin/
+#export CCOMPILER=/home/lord/Desktop/dhd/arm-eabi-4.5-2011-10/bin/arm-eabi-
+PATH=$PATH:/home/lord/Desktop/dhd/arm-eabi-4.6.3-2012-04/bin/
+export CCOMPILER=/home/lord/Desktop/dhd/arm-eabi-4.6.3-2012-04/bin/arm-eabi-
 
 make -j16 ARCH=arm CROSS_COMPILE=$CCOMPILER;
 
